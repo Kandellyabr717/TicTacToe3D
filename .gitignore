@@ -74,4 +74,5 @@ crashlytics-build.properties
 # Unnecessary unity floders and Visual Studio files
 /obj
 .vsconfig
+/ProjectSettings
 
