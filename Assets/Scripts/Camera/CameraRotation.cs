@@ -7,5 +7,5 @@ public class CameraRotation : MonoBehaviour
     [SerializeField] private float _speed;
 
     private void Update() =>
-        _transform.Rotate(Vector3.up, _controller.GetRotationAngle() * _speed * Time.deltaTime);
+        _transform.Rotate(Vector3.up, _controller.GetRotationAngle() * _speed * 0.01f);
 }

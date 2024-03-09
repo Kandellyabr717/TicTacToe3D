@@ -4,9 +4,9 @@ using UnityEngine;
 public class CanvasController : MonoBehaviour
 {
     [SerializeField] private Transform _transform;
-    [SerializeField] private GameObject _crossWinScreen;
-    [SerializeField] private GameObject _circleWinScreen;
-    [SerializeField] private GameObject _drawScreen;
+    [SerializeField] private ScreenActivator _crossWinScreen;
+    [SerializeField] private ScreenActivator _circleWinScreen;
+    [SerializeField] private ScreenActivator _drawScreen;
     [SerializeField] private TurningSideUpdater _turningSide;
 
     public void UpdateTruningSideText(Side side) => _turningSide.UpdateState(side);
@@ -16,8 +16,8 @@ public class CanvasController : MonoBehaviour
     private IEnumerator ActivateWinScreenDelay(Side side)
     {
         yield return new WaitForSeconds(1);
-        if (side == Side.Cross) Instantiate(_crossWinScreen, _transform);
-        if (side == Side.Circle) Instantiate(_circleWinScreen, _transform);
+        if (side == Side.Cross) _crossWinScreen.Activate();
+        if (side == Side.Circle) _circleWinScreen.Activate();
     }
 
     public void ActivateDrawScreen() => StartCoroutine(ActivateDrawScreenDelay());
@@ -25,6 +25,6 @@ public class CanvasController : MonoBehaviour
     private IEnumerator ActivateDrawScreenDelay()
     {
         yield return new WaitForSeconds(1);
-        Instantiate(_drawScreen, _transform);
+        _drawScreen.Activate();
     }
 }

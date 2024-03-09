@@ -40,7 +40,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Rotation"",
                     ""type"": ""Value"",
                     ""id"": ""83017b89-9a12-4df3-a5d5-108e664b2fd5"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -53,33 +53,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""FirstPosition"",
-                    ""type"": ""Value"",
-                    ""id"": ""5b499f68-d569-4bf2-8237-08ba304cdce0"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""SecondPosition"",
-                    ""type"": ""Value"",
-                    ""id"": ""d796fc57-fef6-40b3-bcf2-f5d279d368ab"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""SecondTouch"",
-                    ""type"": ""Button"",
-                    ""id"": ""2a6b7a3d-c4be-4935-8a9f-fccbee518a77"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -118,8 +91,19 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""286cf866-694e-4994-a227-f856b3aa504d"",
+                    ""path"": ""<Touchscreen>/delta/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touchscreen"",
+                    ""action"": ""Scale"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c3673f97-bc25-4073-aa6c-98ac179b2348"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""path"": ""<Mouse>/delta/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse"",
@@ -130,44 +114,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""824441d4-a35e-4081-8d1f-fbff20e11b0c"",
-                    ""path"": ""<Touchscreen>/delta"",
+                    ""path"": ""<Touchscreen>/delta/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Touchscreen"",
                     ""action"": ""Rotation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fe27c7d8-5ce0-47cf-ae12-5e8e0fa61298"",
-                    ""path"": ""<Touchscreen>/touch0/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touchscreen"",
-                    ""action"": ""FirstPosition"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""373f4f3d-e33e-4dfb-b7ff-ca2c3ac5f180"",
-                    ""path"": ""<Touchscreen>/touch1/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SecondTouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5708e565-123d-4f93-bbcc-c80e67cb24c7"",
-                    ""path"": ""<Touchscreen>/touch1/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touchscreen"",
-                    ""action"": ""SecondPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -192,9 +143,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Camera_Holded = m_Camera.FindAction("Holded", throwIfNotFound: true);
         m_Camera_Rotation = m_Camera.FindAction("Rotation", throwIfNotFound: true);
         m_Camera_Scale = m_Camera.FindAction("Scale", throwIfNotFound: true);
-        m_Camera_FirstPosition = m_Camera.FindAction("FirstPosition", throwIfNotFound: true);
-        m_Camera_SecondPosition = m_Camera.FindAction("SecondPosition", throwIfNotFound: true);
-        m_Camera_SecondTouch = m_Camera.FindAction("SecondTouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -259,9 +207,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Camera_Holded;
     private readonly InputAction m_Camera_Rotation;
     private readonly InputAction m_Camera_Scale;
-    private readonly InputAction m_Camera_FirstPosition;
-    private readonly InputAction m_Camera_SecondPosition;
-    private readonly InputAction m_Camera_SecondTouch;
     public struct CameraActions
     {
         private @InputActions m_Wrapper;
@@ -269,9 +214,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Holded => m_Wrapper.m_Camera_Holded;
         public InputAction @Rotation => m_Wrapper.m_Camera_Rotation;
         public InputAction @Scale => m_Wrapper.m_Camera_Scale;
-        public InputAction @FirstPosition => m_Wrapper.m_Camera_FirstPosition;
-        public InputAction @SecondPosition => m_Wrapper.m_Camera_SecondPosition;
-        public InputAction @SecondTouch => m_Wrapper.m_Camera_SecondTouch;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -290,15 +232,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Scale.started += instance.OnScale;
             @Scale.performed += instance.OnScale;
             @Scale.canceled += instance.OnScale;
-            @FirstPosition.started += instance.OnFirstPosition;
-            @FirstPosition.performed += instance.OnFirstPosition;
-            @FirstPosition.canceled += instance.OnFirstPosition;
-            @SecondPosition.started += instance.OnSecondPosition;
-            @SecondPosition.performed += instance.OnSecondPosition;
-            @SecondPosition.canceled += instance.OnSecondPosition;
-            @SecondTouch.started += instance.OnSecondTouch;
-            @SecondTouch.performed += instance.OnSecondTouch;
-            @SecondTouch.canceled += instance.OnSecondTouch;
         }
 
         private void UnregisterCallbacks(ICameraActions instance)
@@ -312,15 +245,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Scale.started -= instance.OnScale;
             @Scale.performed -= instance.OnScale;
             @Scale.canceled -= instance.OnScale;
-            @FirstPosition.started -= instance.OnFirstPosition;
-            @FirstPosition.performed -= instance.OnFirstPosition;
-            @FirstPosition.canceled -= instance.OnFirstPosition;
-            @SecondPosition.started -= instance.OnSecondPosition;
-            @SecondPosition.performed -= instance.OnSecondPosition;
-            @SecondPosition.canceled -= instance.OnSecondPosition;
-            @SecondTouch.started -= instance.OnSecondTouch;
-            @SecondTouch.performed -= instance.OnSecondTouch;
-            @SecondTouch.canceled -= instance.OnSecondTouch;
         }
 
         public void RemoveCallbacks(ICameraActions instance)
@@ -361,8 +285,5 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnHolded(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
         void OnScale(InputAction.CallbackContext context);
-        void OnFirstPosition(InputAction.CallbackContext context);
-        void OnSecondPosition(InputAction.CallbackContext context);
-        void OnSecondTouch(InputAction.CallbackContext context);
     }
 }
