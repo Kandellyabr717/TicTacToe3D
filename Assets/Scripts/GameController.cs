@@ -8,5 +8,5 @@ public class GameController : MonoBehaviour
     public int FieldSize { get => _fieldSize; }
     public int SceneIndex { get => _sceneIndex; }
 
-    private void Awake() => Application.targetFrameRate = 60;
+    private void Awake() => Application.targetFrameRate = 100;
 }
