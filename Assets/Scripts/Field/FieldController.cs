@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 public class FieldController : MonoBehaviour
 {
+    [SerializeField] private GameController _controller;
     [SerializeField] private FieldRaycastersController _raycasters;
     [SerializeField] private CellsDisabler _cellsDisabler;
     [SerializeField] private LineCrosserController _lineCrosser;
@@ -42,7 +43,7 @@ public class FieldController : MonoBehaviour
         OnWin?.Invoke(_currentSide);
     }
 
-    private bool CheckForDraw() => _cellsClosed == 9;
+    private bool CheckForDraw() => _cellsClosed == _controller.FieldSize * _controller.FieldSize;
 
     private void SetDraw()
     {

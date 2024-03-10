@@ -13,10 +13,17 @@ public class FieldRaycaster : MonoBehaviour
         var ray = new Ray(_transform.position, _transform.rotation * Vector3.right * _length);
         var hits = Physics.RaycastAll(ray, _length, _layerMask);
         if (hits.Length != _controller.FieldSize) return false;
-        var first = hits[0].collider.gameObject.GetComponent<SignData>().Side;
-        var second = hits[1].collider.gameObject.GetComponent<SignData>().Side;
-        var third = hits[2].collider.gameObject.GetComponent<SignData>().Side;
+        var sides = new Side[hits.Length];
+        for (var i = 0; i < sides.Length; i++)
+        {
+            sides[i] = hits[i].collider.gameObject.GetComponent<SignData>().Side;
+        }
         line = new (_transform.position, _transform.rotation, _length);
-        return first == second && second == third;
+        var result = true;
+        for (var i = 1; i < sides.Length; i++)
+        {
+            if (sides[i - 1] != sides[i]) result = false;
+        }
+        return result;
     }
 }
