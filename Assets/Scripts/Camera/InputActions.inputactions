@@ -18,7 +18,7 @@
                     "name": "Rotation",
                     "type": "Value",
                     "id": "83017b89-9a12-4df3-a5d5-108e664b2fd5",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -27,7 +27,7 @@
                     "name": "Scale",
                     "type": "Value",
                     "id": "6305fb3c-6df9-4c0a-935d-e8bc57bcb56a",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -59,7 +59,7 @@
                 {
                     "name": "",
                     "id": "f0dce7fd-9191-4500-9fe9-bc687d6fdab0",
-                    "path": "<Mouse>/scroll/y",
+                    "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse",
@@ -70,7 +70,7 @@
                 {
                     "name": "",
                     "id": "286cf866-694e-4994-a227-f856b3aa504d",
-                    "path": "<Touchscreen>/delta/y",
+                    "path": "<Touchscreen>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "Touchscreen",
@@ -81,7 +81,7 @@
                 {
                     "name": "",
                     "id": "c3673f97-bc25-4073-aa6c-98ac179b2348",
-                    "path": "<Mouse>/delta/x",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse",
@@ -92,7 +92,7 @@
                 {
                     "name": "",
                     "id": "824441d4-a35e-4081-8d1f-fbff20e11b0c",
-                    "path": "<Touchscreen>/delta/x",
+                    "path": "<Touchscreen>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "Touchscreen",

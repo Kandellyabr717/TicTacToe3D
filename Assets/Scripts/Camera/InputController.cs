@@ -14,10 +14,16 @@ public class InputController : MonoBehaviour
     {
         if (_input.Camera.Holded.ReadValue<float>() > 0)
         {
-            return _input.Camera.Rotation.ReadValue<float>();
+            var rotation = _input.Camera.Rotation.ReadValue<Vector2>();
+            if (Mathf.Abs(rotation.x) > Mathf.Abs(rotation.y)) return rotation.x;
         }
         return 0;
     }
 
-    public float GetScaleDelta() => _input.Camera.Scale.ReadValue<float>();
+    public float GetScaleDelta()
+    {
+        var scale = _input.Camera.Scale.ReadValue<Vector2>();
+        if (Mathf.Abs(scale.y) > Mathf.Abs(scale.x)) return scale.y;
+        return 0;
+    }
 }
