@@ -8,5 +8,11 @@ public class GameController : MonoBehaviour
     public int FieldSize { get => _fieldSize; }
     public int SceneIndex { get => _sceneIndex; }
 
-    private void Awake() => Application.targetFrameRate = 100;
+    private void Awake()
+    {
+        Application.targetFrameRate = 100;
+        var data = FindFirstObjectByType<GameData>();
+        if (data == null) return;
+        _fieldSize = data.FieldSize;
+    }
 }

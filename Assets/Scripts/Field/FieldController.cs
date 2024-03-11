@@ -1,17 +1,14 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class FieldController : MonoBehaviour
 {
     [SerializeField] private GameController _controller;
+    [SerializeField] private FieldExternal _external;
     [SerializeField] private FieldRaycastersController _raycasters;
     [SerializeField] private CellsDisabler _cellsDisabler;
     [SerializeField] private LineCrosserController _lineCrosser;
     [SerializeField] private GameObject _crossSign;
     [SerializeField] private GameObject _circleSign;
-    [SerializeField] private UnityEvent<Side> OnTurningSideChange;
-    [SerializeField] private UnityEvent<Side> OnWin;
-    [SerializeField] private UnityEvent OnDraw;
 
     public GameObject CurrentSign
     {
@@ -21,9 +18,16 @@ public class FieldController : MonoBehaviour
             return _circleSign;
         }
     }
+    public int FieldSize => _controller.FieldSize;
 
     private Side _currentSide = Side.Cross;
     private int _cellsClosed;
+
+    public void SetLinks(GameController controller, FieldExternal external)
+    {
+        _controller = controller;
+        _external = external;
+    }
 
     private void UpdateState() => _cellsClosed++;
 
@@ -31,7 +35,7 @@ public class FieldController : MonoBehaviour
     {
         if (_currentSide == Side.Cross) _currentSide = Side.Circle;
         else _currentSide = Side.Cross;
-        OnTurningSideChange?.Invoke(_currentSide);
+        _external.TurningSideChange(_currentSide);
     }
 
     private bool CheckForWin(out CrossedLine line) => _raycasters.CheckComplitedLines(out line);
@@ -40,7 +44,7 @@ public class FieldController : MonoBehaviour
     {
         _lineCrosser.CrossLine(line);
         _cellsDisabler.DisableCells();
-        OnWin?.Invoke(_currentSide);
+        _external.Win(_currentSide);
     }
 
     private bool CheckForDraw() => _cellsClosed == _controller.FieldSize * _controller.FieldSize;
@@ -48,10 +52,10 @@ public class FieldController : MonoBehaviour
     private void SetDraw()
     {
         _cellsDisabler.DisableCells();
-        OnDraw?.Invoke();
+        _external.Draw();
     }
 
-    public void CellActivated(Vector2 coords)
+    public void CellActivated()
     {
         UpdateState();
         if (CheckForWin(out CrossedLine line))

@@ -11,7 +11,7 @@ public class SceneLoader : MonoBehaviour
     
     public void LoadMenu() => StartCoroutine(LoadScene(0));
 
-    public void LoadGame(int index) => StartCoroutine(LoadScene(index));
+    public void LoadGame() => StartCoroutine(LoadScene(1));
 
     public void Quit() => StartCoroutine(QuitApp());
 
